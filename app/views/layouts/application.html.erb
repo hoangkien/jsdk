@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= render "layouts/top_menu"%>
+    <div class="Clear"></div>
+      <div id="Container">
+        <div id="Outer">
+          <div id="Header">
+            <div id="Logo">
+              <div id="LogoContainer"><a href="#"><%= image_tag("2015415165917353.png")%></a></div>
+            </div>
+            <div id="SearchForm">
+              <script type="text/javascript">
+                function keyDownHandler(key, link, event) {
+                    if (event.keyCode == key) {
+                        $j("[id$='txtSearch']").click();
+                    }
+                }
+                function OnSearchClick() {
+                    var content = $j("[id$='txtSearch']").val();
+                    if (content == "") return false;
+                    if (content.length < 2) return false;
+                    return true;
+                }
+              </script>
+              <div id="SearchFormContainer">
+                <input name="ctl00$ctlSearch$ctl00$txtSearch" type="text" id="ctlSearch_ctl00_txtSearch" class="search-input" onkeydown="return keyDownHandler(13, &#39;javascript:__doPostBack(%27ctl00$ctlSearch$ctl00$btnSearch%27,%27%27)&#39;, event);">
+                <input type="submit" name="ctl00$ctlSearch$ctl00$btnSearch" value="" onclick="javascript:return OnSearchClick();" id="ctlSearch_ctl00_btnSearch" class="search-button">
+                <a href="http://ecom186clone.bizwebvietnam.com/search.html?action=advance" class="search-adv" title="Tìm kiếm nâng cao">
+                <span>+</span> </a>
+              </div>
+            </div>
+            <div class="Clear"></div>
+          </div>
+          <%= render "layouts/menu"%>
+          <div id="Wrapper">
+            <div id="cphMain_Content">
+              <div id="cphMain_ctl00_ContentPaneTop" class="top_top"></div>
+              <div style="width:1180px; float:left;">
+                <%= render "layouts/left_menu"%>
+              </div>
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

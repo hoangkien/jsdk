@@ -4,52 +4,81 @@
     <title>Admin</title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"%>
+    <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"%>
+    <%= javascript_include_tag "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"%>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <%= render "layouts/top_menu"%>
-    <div class="Clear"></div>
+    <body style="">
+      <div class="aspNetHidden">
+         <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+         <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+         <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJOTE0NjEzNTk4ZGSdkqjbtdnF+Hc7uNLPFu+g7ujuzkPkM7tnVCDkBf+B9Q==">
+      </div>
+      <script type="text/javascript">
+         //<![CDATA[
+         var theForm = document.forms['form1'];
+         if (!theForm) {
+             theForm = document.form1;
+         }
+         function __doPostBack(eventTarget, eventArgument) {
+             if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+                 theForm.__EVENTTARGET.value = eventTarget;
+                 theForm.__EVENTARGUMENT.value = eventArgument;
+                 theForm.submit();
+             }
+         }
+         //]]>
+      </script>
+      <script src="./assets/AC_RunActiveContent.js" type="text/javascript"></script>
+      <div class="aspNetHidden">
+         <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="90059987">
+      </div>
+      <div id="AjaxLoading"><img src="./assets/ajax-load.gif">&nbsp; Đang tải... Vui lòng chờ...</div>
+      <div id="bg_TopMenu">
+         <div class="bg_topmenu">
+            <%= render"layouts/top_menu" %>
+         </div>
+      </div>
+      <div class="Clear"></div>
       <div id="Container">
-        <div id="Outer">
-          <div id="Header">
-            <div id="Logo">
-              <div id="LogoContainer"><a href="#"><%= image_tag("2015415165917353.png")%></a></div>
-            </div>
-            <div id="SearchForm">
-              <script type="text/javascript">
-                function keyDownHandler(key, link, event) {
-                    if (event.keyCode == key) {
-                        $j("[id$='txtSearch']").click();
-                    }
-                }
-                function OnSearchClick() {
-                    var content = $j("[id$='txtSearch']").val();
-                    if (content == "") return false;
-                    if (content.length < 2) return false;
-                    return true;
-                }
-              </script>
-              <div id="SearchFormContainer">
-                <input name="ctl00$ctlSearch$ctl00$txtSearch" type="text" id="ctlSearch_ctl00_txtSearch" class="search-input" onkeydown="return keyDownHandler(13, &#39;javascript:__doPostBack(%27ctl00$ctlSearch$ctl00$btnSearch%27,%27%27)&#39;, event);">
-                <input type="submit" name="ctl00$ctlSearch$ctl00$btnSearch" value="" onclick="javascript:return OnSearchClick();" id="ctlSearch_ctl00_btnSearch" class="search-button">
-                <a href="http://ecom186clone.bizwebvietnam.com/search.html?action=advance" class="search-adv" title="Tìm kiếm nâng cao">
-                <span>+</span> </a>
-              </div>
+         <div id="Outer">
+            <div id="Header">
+               <%= render"layouts/header"%>
             </div>
             <div class="Clear"></div>
-          </div>
-          <%= render "layouts/menu"%>
-          <div id="Wrapper">
-            <div id="cphMain_Content">
-              <div id="cphMain_ctl00_ContentPaneTop" class="top_top"></div>
-              <div style="width:1180px; float:left;">
-                <%= render "layouts/left_menu"%>
-              </div>
-              <%= yield %>
             </div>
-          </div>
-        </div>
+            <div id="Menu">
+                <%= render"layouts/menu"%>
+            </div>
+            <div id="Wrapper">
+                <div id="cphMain_Content">
+                  <div id="cphMain_ctl00_ContentPaneTop" class="top_top"></div>
+                  <div style="width:1180px; float:left;">
+                     <div id="cphMain_ctl00_LeftPane" class="left">
+                        <%= render"layouts/left_menu"%>
+                        <%= yield :left %>
+                     </div>
+                  </div>
+                  <%= yield %>
+                  <div class="Clear"></div>
+                  <div style="width:1180px; margin:0px auto;" class="wrap_product">
+                  </div>
+                  <div class="Clear"></div>
+                  <div id="cphMain_ctl00_BottomPane" class="bottom">
+                    <%= render"layouts/bottom"%>
+                  </div>
+                </div>
+               </div>
+            </div>
+            <div class="Clear"></div>
+         </div>
+        <div id="topback" style="display: none;">Back to Top</div>
       </div>
-    </div>
+      <div id="Footer">
+        <%= render"layouts/footer"%>
+        <div class="Clear"></div>
+      </div>
   </body>
 </html>

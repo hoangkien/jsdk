@@ -14,7 +14,9 @@
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require turbolinks
+//= require ckeditor/init
 //= require_tree .
+
  var $j = jQuery.noConflict();
 $j(document).ready(function() {
   $j(".addtocart").click(function () {

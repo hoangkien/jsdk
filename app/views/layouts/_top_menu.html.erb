@@ -1,39 +1,39 @@
-<div id="bg_TopMenu">
-  <div class="bg_topmenu">
-    <div id="TopMenu">
-      <ul>
-        <li class="First topMenu_Account">
-          <a href="http://ecom186clone.bizwebvietnam.com/account/personal.html">
-          Tài khoản của tôi
-          </a>
-        </li>
-        <li class="topMenu_Order">
-          <a href="http://ecom186clone.bizwebvietnam.com/account/order-status.html">
-          Quản lý đơn hàng
-          </a>
-        </li>
-        <li class="topMenu_Wishlist">
-          <a href="http://ecom186clone.bizwebvietnam.com/account/wishlist.html">
-          Danh sách ưa thích
-          </a>
-        </li>
-        <li class="CartLink topMenu_Cart">
-          <a href="http://ecom186clone.bizwebvietnam.com/account/cart.html">
+<div id="TopMenu">
+  <ul>
+      <li class="First topMenu_Account">
+         <a href="http://ecom186clone.bizwebvietnam.com/account/personal.html">
+         Tài khoản của tôi
+         </a>
+      </li>
+      <li class="topMenu_Order">
+         <a href="http://ecom186clone.bizwebvietnam.com/account/order-status.html">
+         Quản lý đơn hàng
+         </a>
+      </li>
+      <li class="topMenu_Wishlist">
+         <a href="http://ecom186clone.bizwebvietnam.com/account/wishlist.html">
+         Danh sách ưa thích
+         </a>
+      </li>
+      <li class="CartLink topMenu_Cart">
+        <%= link_to cart_path do %>
           Giỏ hàng
-          <span id="pInTop"></span>
-          </a>
-        </li>
-        <li class="topMenu_Login">
-          <a href="http://ecom186clone.bizwebvietnam.com/account/login.html">
-          Đăng nhập
-          </a>
-        </li>
-        <li class="topMenu_Register">
-          <a href="http://ecom186clone.bizwebvietnam.com/account/register.html">
-          Đăng ký
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
+        <% end -%>
+      </li>
+      <li class="topMenu_Login">
+        <% if user_signed_in? %>
+          <span><%= current_user.email %></span>
+        <% else%>
+          <%= link_to"Đăng nhập", new_user_session_path%>
+        <% end -%>
+      </li>
+      <li class="topMenu_Register">
+        <% if user_signed_in? %>
+          <%= link_to"Đăng xuất",destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to"Đăng ký",new_user_registration_path%>
+        <% end -%>
+
+      </li>
+  </ul>
 </div>

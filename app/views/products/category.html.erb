@@ -1,1 +1,288 @@
-<h1>Category</h1>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<div id="Breadcrumb" class="Breadcrumb">
+  <ul>
+    <li class="first">
+      <%= link_to"Trang chủ",home_path%>
+    </li>
+    <li>
+      <a href="/san-pham-p7.html">Sản phẩm</a>
+    </li>
+    <li>
+      <span><%= @cate %></span>
+    </li>
+  </ul>
+</div>
+<div class="wrap-content">
+  <div id="cphMain_ctl00_ContentPane" class="center center_right">
+    <div class="ProductListContainer ListItems DefaultModule">
+      <div class="category-title defaultTitle productlist-title">
+        <h1>
+          Giày đông ấm áp
+        </h1>
+      </div>
+      <div class="TopContent">
+      </div>
+      <div id="ProductList" class="defaultContent listing-type-list productlist-content catalog-listing">
+        <ul class="ProductList">
+          <% @products.each_with_index do |product,index|%>
+            <li class='<%= index % 2 == 0 ? "Odd" : "Even" %>'>
+              <div id="ProductImage" class="ProductImage ProductImageTooltip">
+               <%= link_to image_tag(product.image.url()),show_path(product.name_url)%>
+              </div>
+              <div class="saleFlag iconSprite disable">
+              </div>
+              <div class="ProductDetails">
+                <strong>
+                  <%= link_to show_path(product) do %>
+                    <%= product.name %>
+                    <span class="#tooltipPromotion6926964"></span>
+                  <% end -%>
+                </strong>
+              </div>
+              <div class="ProductPrice">
+                <div class="retail-price disable">
+                  <span class="price-label"></span><span class="price"><strike class="RetailPriceValue">
+                  </strike>
+                  </span>
+                </div>
+                <div class="special-price">
+                  <span class="price-label"></span>
+                  <span class="price">
+                  <em><%= number_to_currency(product.price, unit: "$ ") %></em>
+                  </span>
+                </div>
+              </div>
+              <div class="ProductRating Rating-1" style="display: none;">
+                <div class="RatingImage">
+                </div>
+              </div>
+              <div class="ProductCompareButton" style="display: none;">
+                <label>
+                <input id="compare-6926964" type="checkbox" value="" onclick="javascript:clickCheckBoxCompare(6926964);" />
+                So sánh
+                </label>
+              </div>
+              <input type="text" id="cphMain_ctl00_ctl03_ctl00_qty_" maxlength="5" value="1" class="Field45 quantityInput NormalTextBox" style="display:none" />
+              <div class="ProductActionAdd" data-target="#myModal" data-id="<%= product.id %>" onClick="Popupcart(<%= product.id %>,1);"><a href="javascript:;" ><span>Mua hàng</span></a>
+              </div>
+            </li>
+          <% end -%>
+        </ul>
+
+        <div class="clear">
+        </div>
+        <div class="compare-button">
+          <a id="bottom_compare" href="#comparison" style="display: none;">
+          <span>So sánh</span> </a>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="clear defaultFooter productlist-footer">
+        <div>
+        </div>
+      </div>
+    </div>
+    <input type="hidden" name="ctl00$cphMain$ctl00$ctl03$ctl00$hdCompare" id="cphMain_ctl00_ctl03_ctl00_hdCompare" />
+    <script type="text/javascript">
+      function clickCheckBoxCompare(id) {
+          var objCheck = document.getElementById('compare-' + id);
+          var objSel = document.getElementById('cphMain_ctl00_ctl03_ctl00_hdCompare');
+          var currentString = objSel.value;
+          var newString = '';
+          if (objCheck.checked == true) {
+              if (currentString.indexOf(id + ',') == -1) newString = currentString + id + ',';
+          }
+          else { newString = currentString.replace(id + ',', ''); }
+          objSel.value = newString;
+          var productCompare = newString.substring(0, newString.length - 1);
+          if (productCompare == '') $j('a#bottom_compare').hide();
+          else $j('a#bottom_compare').show();
+      }
+    </script>
+    <div style="display: none;">
+      <div id="comparison" style="width: 1000px; height: 500px; background-color: #FFF;"></div>
+    </div>
+  </div>
+</div>
+
+<% content_for :left do %>
+      <div id="SideTopSeller" class="TopSellers Moveable Panel DefaultModule">
+      <div class="defaultTitle SideTopSeller-Title">
+        <span>
+        Sản phẩm bán chạy</span>
+      </div>
+      <div class="defaultContent SideTopSeller-content">
+        <div class="BlockContent">
+          <ul class="ProductList">
+            <li class="Odd first" style="padding-top: 15px;">
+              <div class="TopSellerNumber1">
+                1
+              </div>
+              <div id="ProductImage" class="ProductImage" style="display: block">
+                <a class="" href='/giay-ibino-be-gai-6926964.html'>
+                <img src="http://media.bizwebmedia.net/Thumbnails//sites/97940/data/images/2015/3/115042498.209.160.jpg" alt="Giày IBINO bé gái" title="Giày IBINO bé gái"
+                  onerror="this.src='http://media.bizwebmedia.net/Thumbnail.ashx?img=/sites/97940/data/images/2015/3/115042498.jpg&width=209&height=160';" />
+                </a>
+              </div>
+              <div class="ProductDetails">
+                <strong><a href='/giay-ibino-be-gai-6926964.html'>
+                Giày IBINO bé gái</a></strong>
+              </div>
+              <div class="ProductPrice">
+                <div class="retail-price disable">
+                  <span class="price-label"></span><span class="price"><strike class="RetailPriceValue">
+                  </strike>
+                  </span>
+                </div>
+                <div class="special-price">
+                  <span class="price-label"><span>
+                  <span class="price">
+                  <em>
+                  259.000 ₫</em>
+                  </em>
+                  </span>
+                </div>
+              </div>
+              <hr class="Clear" />
+            </li>
+            <li class="Even" style="">
+              <div class="TopSellerNumber">
+                2
+              </div>
+              <div id="ProductImage" class="ProductImage" style="display: none">
+                <a class="" href='/giay-be-gai-kim-ba-chip-6926963.html'>
+                <img src="http://media.bizwebmedia.net/Thumbnails//sites/97940/data/images/2015/3/105644997.209.160.jpg" alt="Giày bé gái Kim ba chíp" title="Giày bé gái Kim ba chíp"
+                  onerror="this.src='http://media.bizwebmedia.net/Thumbnail.ashx?img=/sites/97940/data/images/2015/3/105644997.jpg&width=209&height=160';" />
+                </a>
+              </div>
+              <div class="ProductDetails">
+                <strong><a href='/giay-be-gai-kim-ba-chip-6926963.html'>
+                Giày bé gái Kim ba chíp</a></strong>
+              </div>
+              <div class="ProductPrice">
+                <div class="retail-price disable">
+                  <span class="price-label"></span><span class="price"><strike class="RetailPriceValue">
+                  </strike>
+                  </span>
+                </div>
+                <div class="special-price">
+                  <span class="price-label"><span>
+                  <span class="price">
+                  <em>
+                  356.000 ₫</em>
+                  </em>
+                  </span>
+                </div>
+              </div>
+              <hr class="Clear" />
+            </li>
+            <li class="Odd " style="">
+              <div class="TopSellerNumber">
+                3
+              </div>
+              <div id="ProductImage" class="ProductImage" style="display: none">
+                <a class="" href='/giay-be-gai-adidas-6926962.html'>
+                <img src="http://media.bizwebmedia.net/Thumbnails//sites/97940/data/images/2015/3/081829959.209.160.jpg" alt="Giày bé gái Adidas" title="Giày bé gái Adidas"
+                  onerror="this.src='http://media.bizwebmedia.net/Thumbnail.ashx?img=/sites/97940/data/images/2015/3/081829959.jpg&width=209&height=160';" />
+                </a>
+              </div>
+              <div class="ProductDetails">
+                <strong><a href='/giay-be-gai-adidas-6926962.html'>
+                Giày bé gái Adidas</a></strong>
+              </div>
+              <div class="ProductPrice">
+                <div class="retail-price disable">
+                  <span class="price-label"></span><span class="price"><strike class="RetailPriceValue">
+                  </strike>
+                  </span>
+                </div>
+                <div class="special-price">
+                  <span class="price-label"><span>
+                  <span class="price">
+                  <em>
+                  540.000 ₫</em>
+                  </em>
+                  </span>
+                </div>
+              </div>
+              <hr class="Clear" />
+            </li>
+            <li class="Even" style="">
+              <div class="TopSellerNumber">
+                4
+              </div>
+              <div id="ProductImage" class="ProductImage" style="display: none">
+                <a class="" href='/giay-vai-tap-di-6926961.html'>
+                <img src="http://media.bizwebmedia.net/Thumbnails//sites/97940/data/images/2015/3/063343886.209.160.jpg" alt="Giày vải tập đi" title="Giày vải tập đi"
+                  onerror="this.src='http://media.bizwebmedia.net/Thumbnail.ashx?img=/sites/97940/data/images/2015/3/063343886.jpg&width=209&height=160';" />
+                </a>
+              </div>
+              <div class="ProductDetails">
+                <strong><a href='/giay-vai-tap-di-6926961.html'>
+                Giày vải tập đi</a></strong>
+              </div>
+              <div class="ProductPrice">
+                <div class="retail-price disable">
+                  <span class="price-label"></span><span class="price"><strike class="RetailPriceValue">
+                  </strike>
+                  </span>
+                </div>
+                <div class="special-price">
+                  <span class="price-label"><span>
+                  <span class="price">
+                  <em>
+                  198.000 ₫</em>
+                  </em>
+                  </span>
+                </div>
+              </div>
+              <hr class="Clear" />
+            </li>
+            <li class="Odd " style="">
+              <div class="TopSellerNumber">
+                5
+              </div>
+              <div id="ProductImage" class="ProductImage" style="display: none">
+                <a class="" href='/giay-the-thao-6926960.html'>
+                <img src="http://media.bizwebmedia.net/Thumbnails//sites/97940/data/images/2015/3/054005689.209.160.jpg" alt="Giày thể thao" title="Giày thể thao"
+                  onerror="this.src='http://media.bizwebmedia.net/Thumbnail.ashx?img=/sites/97940/data/images/2015/3/054005689.jpg&width=209&height=160';" />
+                </a>
+              </div>
+              <div class="ProductDetails">
+                <strong><a href='/giay-the-thao-6926960.html'>
+                Giày thể thao</a></strong>
+              </div>
+              <div class="ProductPrice">
+                <div class="retail-price disable">
+                  <span class="price-label"></span><span class="price"><strike class="RetailPriceValue">
+                  </strike>
+                  </span>
+                </div>
+                <div class="special-price">
+                  <span class="price-label"><span>
+                  <span class="price">
+                  <em>
+                  145.000 ₫</em>
+                  </em>
+                  </span>
+                </div>
+              </div>
+              <hr class="Clear" />
+            </li>
+          </ul>
+        </div>
+        <div class="Clear">
+        </div>
+      </div>
+      <div class="clear defaultFooter SideTopSeller-footer">
+        <div>
+        </div>
+      </div>
+    </div>
+<% end %>
+<div class="add_cart">
+  <%= render"order"%>
+</div>
+

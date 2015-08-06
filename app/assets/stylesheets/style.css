@@ -641,7 +641,8 @@ hr {
 
 .top_bottom {
     margin: 0px auto;
-    width: 1180px;
+    width: 1280px;
+    margin-left: -18px;
 }
 
 .home_title {
@@ -1922,7 +1923,7 @@ div.newsLastest div.newsLastest_Item {
 .center_right .ProductList li {
     width: 207px;
     border: none;
-    margin: 0 20px 20px 0;
+    margin: 0 15px 20px 0;
 }
 
 .center_right .ProductList li:last-of-type {
@@ -2416,6 +2417,10 @@ em.ProductPrice {
     overflow: hidden;
     width: 220px;
 }
+#ProductDetails .ProductThumbImage img{
+    width: 250px;
+    margin: 25px 1px;
+}
 
 .TabNav, .TabNav li {
     list-style: none outside none;
@@ -2710,7 +2715,7 @@ em.ProductPrice {
     padding: 6px 3px;
     font-size: 14px;
     width: 100px;
-    height: 20px;
+    height: 33px;
 }
 
 #ProductDetails .ProductDetailsGrid .ProductAddToCart {
@@ -2782,11 +2787,11 @@ em.ProductPrice {
     border-bottom: 1px solid #e6e6e6;
     position: absolute;
     width: 900px;
-    left: 280px;
+    left: 260px;
 }
 
 .Breadcrumb li a {
-    background: url("images/breadcrumbsep.png") no-repeat scroll right center transparent;
+    background: url("/assets/breadcrumbsep.png") no-repeat scroll right center transparent;
     color: #202020;
     font-weight: 600;
     padding-right: 10px;
@@ -3384,7 +3389,7 @@ a.compare {
     border-bottom: 1px solid #dbdbdb;
     color: #9074a7;
     padding: 6px 10px;
-    text-align: left;
+    text-align: center;
 }
 .Block table.CartContents td
 {
@@ -3797,9 +3802,13 @@ input[type="button"]
 {
     padding: 15px 5px;
 }
-.popup-cart .fastCartThumb, .popup-cart .fastCartItemBox
+.fastCartTop .fastCartThumb img{
+    width: 200px !important;
+}
+.fastCartTop .fastCartThumb, .fastCartTop .fastCartItemBox
 {
     float: left;
+    margin-left: 10px !important;
 }
 .popup-cart .fastCartItemBox
 {

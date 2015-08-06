@@ -36,20 +36,37 @@ $j(window).load(function () {
 $j('#subscribe_form .subscribe_email').html('We will only send good news');
 
 $j(function () {
-        $j("[id$='txtEmail']").val("Nhập email của bạn");
-        $j("[id$='txtEmail']").focus(function () {
-            if ($j(this).val() == "Nhập email của bạn") { $j(this).val(""); }
-        }).focusout(function () {
-            if ($j(this).val() == "") { $j("[id$='txtEmail']").val("Nhập email của bạn"); }
-        });
-    });
+  $j("[id$='txtEmail']").val("Nhập email của bạn");
+  $j("[id$='txtEmail']").focus(function () {
+      if ($j(this).val() == "Nhập email của bạn") { $j(this).val(""); }
+  }).focusout(function () {
+      if ($j(this).val() == "") { $j("[id$='txtEmail']").val("Nhập email của bạn"); }
+  });
+});
 
 
 $j(function () {
-        $j("[id$='txtSearch']").val("Nhập từ khóa cần tìm");
-        $j("[id$='txtSearch']").focus(function () {
-            if ($j(this).val() == "Nhập từ khóa cần tìm") { $j(this).val(""); }
-        }).focusout(function () {
-            if ($j(this).val() == "") { $j("[id$='txtSearch']").val("Nhập từ khóa cần tìm"); }
-        });
-    });
+  $j("[id$='txtSearch']").val("Nhập từ khóa cần tìm");
+  $j("[id$='txtSearch']").focus(function () {
+      if ($j(this).val() == "Nhập từ khóa cần tìm") { $j(this).val(""); }
+  }).focusout(function () {
+      if ($j(this).val() == "") { $j("[id$='txtSearch']").val("Nhập từ khóa cần tìm"); }
+  });
+});
+
+
+function Popupcart(id){
+    var quantity = $("#cphMain_ctl00_ctl03_ctl00_qty_").val();
+    $j.ajax({
+      url: "/addcart",
+      type: "post",
+      dataType: 'script',
+      data: {id:id,quantity:quantity},
+      success: function(data){
+        // console.log(data);
+      },
+      error: function(){
+        console.log("failed");
+      }
+    })
+}

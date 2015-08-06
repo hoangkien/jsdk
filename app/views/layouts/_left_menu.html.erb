@@ -1,83 +1,82 @@
-<div id="cphMain_ctl00_LeftPane" class="left">
-  <div id="vertical-menu" class="DefaultModule cate-menu">
-    <div class="defaultTitle cate-menu-title">
-      <span>danh mục sản phẩm</span>
-    </div>
-    <div class="defaultContent cate-menu-content">
-      <ul>
-        <li class="level0 level0-1843691 first">
-          <%= link_to"Bán chạy nhất",show_path("hang-ban-chay-nha") %>
+<div id="vertical-menu" class="DefaultModule cate-menu">
+  <div class="defaultTitle cate-menu-title">
+    <span>danh mục sản phẩm</span>
+  </div>
+  <div class="defaultContent cate-menu-content">
+    <ul>
+      <li class="level0 level0-1843691 first">
+        <%= link_to"Bán chạy nhất",show_path("hang-ban-chay-nhat") %>
+      </li>
+      <li class="level0 level0-1843692">
+        <%= link_to"Hàng mới về",show_path("hang-moi-ve")%>
+      </li>
+      <% Category.find_each do |cate| %>
+        <li class="level0">
+          <%= link_to cate.name,show_path(cate.name_url)%>
         </li>
-        <li class="level0 level0-1843692">
-          <%= link_to"Hàng mới về",show_path("hang-moi-ve")%>
-        </li>
-        <% Category.find_each do |cate| %>
-          <li class="level0">
-            <%= link_to cate.name,show_path(cate.name_url)%>
-          </li>
-        <% end -%>
+      <% end -%>
 <!--  -->
-      </ul>
+    </ul>
+  </div>
+  <div class="defaultFooter cate-menu-footer">
+    <div></div>
+  </div>
+</div>
+<script type="text/javascript">
+  $j(document).ready(function () {
+      var language = "vi-VN" == "vi-VN" ? 0 : 1;
+      var messages = [
+          ["Mời bạn nhập họ tên!", "Mời bạn nhập email!", "Email không đúng định đạng, ví dụ: john@example.com!"],
+          ["Name is required!", "Email is required!", "Email is not valid, for example: john@example.com!"]
+      ];
+
+      $j('#cphMain_ctl00_ctl13_ctl00_btnReg').click(function () {
+
+          if ($j('#cphMain_ctl00_ctl13_ctl00_txtEmail').val() == '') {
+              alert(messages[language][1]);
+              $j('#cphMain_ctl00_ctl13_ctl00_txtEmail').focus();
+              return false;
+          }
+
+          if ($j('#cphMain_ctl00_ctl13_ctl00_txtEmail').val().indexOf('@') == -1 || $j('#cphMain_ctl00_ctl13_ctl00_txtEmail').val().indexOf('.') == -1) {
+              alert(messages[language][2]);
+              $j('#cphMain_ctl00_ctl13_ctl00_txtEmail').focus();
+              $j('#cphMain_ctl00_ctl13_ctl00_txtEmail').select();
+              return false;
+          }
+
+          // Set the action of the form to stop spammers
+          $j('#subscribe_form').append("<input type=\"hidden\" name=\"check\" value=\"1\" \/>");
+          return true;
+      });
+  });
+</script>
+<script type="text/javascript">
+  function FancyboxOpen() {
+      $j.fancybox('#Fanc');
+  }
+
+</script>
+<div class=" DefaultModule EmailSubscription">
+  <div class="defaultTitle EmailSubscription-Title">
+    <span>
+    Đăng ký nhận email</span>
+  </div>
+  <div class="defaultContent EmailSubscription-content">
+    <div id="subscribe_form" class="BlockContent">
+      <label class="subscribe_email">We will only send good news</label>
+      <input name="ctl00$cphMain$ctl00$ctl13$ctl00$txtEmail" type="text" id="cphMain_ctl00_ctl13_ctl00_txtEmail" class="Textbox subscribe_email_input">
+      <input type="submit" name="ctl00$cphMain$ctl00$ctl13$ctl00$btnReg" value="Đăng ký" id="cphMain_ctl00_ctl13_ctl00_btnReg" class="Button">
     </div>
-    <div class="defaultFooter cate-menu-footer">
-      <div></div>
+    <div class="Clear">
     </div>
   </div>
-  <script type="text/javascript">
-    $j(document).ready(function () {
-        var language = "vi-VN" == "vi-VN" ? 0 : 1;
-        var messages = [
-            ["Mời bạn nhập họ tên!", "Mời bạn nhập email!", "Email không đúng định đạng, ví dụ: john@example.com!"],
-            ["Name is required!", "Email is required!", "Email is not valid, for example: john@example.com!"]
-        ];
-
-        $j('#cphMain_ctl00_ctl13_ctl00_btnReg').click(function () {
-
-            if ($j('#cphMain_ctl00_ctl13_ctl00_txtEmail').val() == '') {
-                alert(messages[language][1]);
-                $j('#cphMain_ctl00_ctl13_ctl00_txtEmail').focus();
-                return false;
-            }
-
-            if ($j('#cphMain_ctl00_ctl13_ctl00_txtEmail').val().indexOf('@') == -1 || $j('#cphMain_ctl00_ctl13_ctl00_txtEmail').val().indexOf('.') == -1) {
-                alert(messages[language][2]);
-                $j('#cphMain_ctl00_ctl13_ctl00_txtEmail').focus();
-                $j('#cphMain_ctl00_ctl13_ctl00_txtEmail').select();
-                return false;
-            }
-
-            // Set the action of the form to stop spammers
-            $j('#subscribe_form').append("<input type=\"hidden\" name=\"check\" value=\"1\" \/>");
-            return true;
-        });
-    });
-  </script>
-  <script type="text/javascript">
-    function FancyboxOpen() {
-        $j.fancybox('#Fanc');
-    }
-
-  </script>
-  <div class=" DefaultModule EmailSubscription">
-    <div class="defaultTitle EmailSubscription-Title">
-      <span>
-      Đăng ký nhận email</span>
-    </div>
-    <div class="defaultContent EmailSubscription-content">
-      <div id="subscribe_form" class="BlockContent">
-        <label class="subscribe_email">We will only send good news</label>
-        <input name="ctl00$cphMain$ctl00$ctl13$ctl00$txtEmail" type="text" id="cphMain_ctl00_ctl13_ctl00_txtEmail" class="Textbox subscribe_email_input">
-        <input type="submit" name="ctl00$cphMain$ctl00$ctl13$ctl00$btnReg" value="Đăng ký" id="cphMain_ctl00_ctl13_ctl00_btnReg" class="Button">
-      </div>
-      <div class="Clear">
-      </div>
-    </div>
-    <div class="clear defaultFooter EmailSubscription-footer">
-      <div>
-      </div>
-    </div>
-    <div id="Fanc" style="display: none;">
-      <div class="holder">
-      </div>
+  <div class="clear defaultFooter EmailSubscription-footer">
+    <div>
     </div>
   </div>
+  <div id="Fanc" style="display: none;">
+    <div class="holder">
+    </div>
+  </div>
+

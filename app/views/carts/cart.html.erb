@@ -1,0 +1,75 @@
+<div id="Breadcrumb" class="Breadcrumb">
+  <ul>
+    <li class="first">
+      <%= link_to"Trang chủ",home_path%>
+    </li>
+    <li>
+      <a href="#">Giỏ hàng</a>
+    </li>
+  </ul>
+</div>
+<div class="wrap-content">
+  <div id="cphMain_ctl00_TopPane" class="top"></div>
+  <div id="cphMain_ctl00_ContentPane" class="center center_right">
+      <div class="Block DefaultModule">
+        <div id="CartHeader" class="Block Moveable Panel">
+        <div id="cart_content">
+          <h2>
+            Giỏ hàng của bạn
+            <span class="hidden">
+              <span id="ltrDiscountAmount">0</span>
+            </span>
+          </h2>
+          <div id="CartContainer" class="Block Moveable Panel">
+            <% if @carts.blank? %>
+              <span>Chưa có sản phẩm nào trong giỏ hàng của bạn!</span>
+            <% else -%>
+              <div class="BlockContent">
+              <div>
+                <div class="cart">
+                  <table class="CartContents" cellspacing="0" rules="rows" border="1" id="cphMain_ctl00_ctl03_ctl00_grvList" style="width:100%;border-collapse:collapse;">
+                    <tbody>
+                      <tr>
+                        <th scope="col"> Mã SP </th>
+                        <th scope="col"> Ảnh </th>
+                        <th align="left" scope="col"> Sản phẩm </th>
+                        <th align="left" scope="col"> Số lượng </th>
+                        <th align="right" scope="col"> Giá </th>
+                        <th align="right" scope="col"> Tổng </th>
+                        <th></th>
+                      <%= render "cart" %>
+                      <tr>
+                        <td align="right" colspan="7">
+                          <div class="Total" style="text-align:right">
+                            Thành tiền:   <%= number_to_currency(@carts.map { |id,qty| Product.find(id.to_i).price * qty }.reduce(:+), unit: "$ ")%>
+                          </div>
+                          <div class="SubTotal">
+                            Tổng tiền thanh toán:   <%= number_to_currency(@carts.map { |id,qty| Product.find(id.to_i).price * qty }.reduce(:+), unit: "$ ")%>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+                <div class="coupon-code">
+                  Mã khuyến mại
+                  <input name="ctl00$cphMain$ctl00$ctl03$ctl00$txtCouponCode" type="text" id="cphMain_ctl00_ctl03_ctl00_txtCouponCode" class="NormalTextBox">
+                  <input type="submit" name="ctl00$cphMain$ctl00$ctl03$ctl00$btnApplyCoupon" value="Áp dụng" id="cphMain_ctl00_ctl03_ctl00_btnApplyCoupon">
+                </div>
+              </div>
+              <div class="Clear"></div>
+              <div class="FloatRight">
+                <input type="submit" name="ctl00$cphMain$ctl00$ctl03$ctl00$btnUpdateQty" value="Cập nhật số lượng" id="cphMain_ctl00_ctl03_ctl00_btnUpdateQty">
+                <input type="submit" name="ctl00$cphMain$ctl00$ctl03$ctl00$btnDeleteCart2" value="Xóa giỏ hàng"id="cphMain_ctl00_ctl03_ctl00_btnDeleteCart2">
+                <input type="submit" name="ctl00$cphMain$ctl00$ctl03$ctl00$btnProceed2" value="Đặt mua &amp; Thanh toán" id="cphMain_ctl00_ctl03_ctl00_btnProceed2">
+              </div>
+              <div class="Clear"></div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

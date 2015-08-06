@@ -1,0 +1,12 @@
+<% @carts.each do |id,qty|  %>
+  <tr data-id="<%= id.to_i %>">
+    <% product = Product.find(id.to_i) %>
+    <td> <%= product.code %> </td>
+    <td> <%= link_to image_tag(product.image.url(),size:"100x50") %> </td>
+    <td> <%= product.name %> </td>
+    <td> <%= qty %> </td>
+    <td> <%= number_to_currency(product.price, unit:"$ ")%> </td>
+    <td> <%= number_to_currency(product.price * qty, unit:"$ ")%> </td>
+    <td> <%= link_to"Delete",destroy_cart_path(id.to_i), remote: true, method: :delete  %> </td>
+  </tr>
+<% end -%>

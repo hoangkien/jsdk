@@ -1,0 +1,45 @@
+<div class="modal fade" id="myModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2>1 sản phẩm đã được thêm vào giỏ hàng.</h2>
+        </div>
+        <div class="modal-body">
+          <div class="fastCartTop">
+            <div class="fastCartThumb" style="float:left">
+              <%= link_to image_tag(@product.image.url()), show_path(@product) if @product %>
+            </div>
+            <div class="fastCartItemBox" style="float:left">
+              <div>
+                <%= link_to @product.name, show_path(@product) if @product%>
+              </div>
+              <div>
+                <em class="productPrice"><%= @product.price if @product %> ₫</em>
+              </div>
+              <div class="quantity">
+                Số lượng: <span><%= @product_quantity%></span>
+              </div>
+            </div>
+            <div class="fastCartSummaryBox" style="float:right">
+              <div class="subtotal">Trị giá đơn hàng: <em class="productPrice"><%= @total.blank? ? 0 : @total %> ₫</em></div>
+              <div>Giỏ hàng của bạn hiện có <span id="fastCartNumItemsTxt"><%= @quantity if @quantity%></span> sản phẩm</div>
+            </div>
+            <div class="order-button-container">
+              <a href="/checkout.aspx" class="button"><span>Đặt hàng và thanh toán</span></a>
+              <%= link_to cart_path, class:"button" do %>
+                <span>Xem giỏ hàng</span>
+              <% end -%>
+              <a href="javascript:;" class="button" onclick="$j.fancybox.close();"><span>Mua thêm sản phẩm</span></a>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

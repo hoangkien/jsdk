@@ -13,7 +13,7 @@ ActiveAdmin.register Product do
 #   permitted
 # end
 
-  permit_params :name, :code, :price, :image, :origin, :color, :size, :category_id
+  permit_params :name, :code, :price, :image, :origin, :color, :size, :category_id, :name_url, :details
 
   index do
     selectable_column
@@ -47,6 +47,7 @@ ActiveAdmin.register Product do
       f.input :origin
       f.input :color, :as => :string
       f.input :size
+      f.input :details, :as => :ckeditor
     end
     f.actions
   end
@@ -65,6 +66,9 @@ ActiveAdmin.register Product do
       row :origin
       row :color
       row :size
+      row :details do
+        raw product.details
+      end
     end
     active_admin_comments
   end

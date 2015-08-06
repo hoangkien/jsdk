@@ -1,9 +1,21 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
+  devise_for :users, :path => "", :path_names => {:sign_in =>"login",:sign_out => "logout"}
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  get 'home/' => "home#index", as: :home
+
+  get '/' => "home#index", as: :home
   scope controller: :products do
     get'/:name_url.html' => :show, as: :show
+  end
+
+  scope controller: :orders do
+    post '/addcart' => :add_cart ,as: :add_cart
+  end
+
+  scope controller: :carts do
+    get '/cart' => :cart, as: :cart
+    delete '/cart/destroy/:id' => :destroy, as: :destroy_cart
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

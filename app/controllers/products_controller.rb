@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
     if check_category?(params[:name_url])
       render "category"
     else
-      @product = Product.where(name_url: params[:name_url])
+      @product = Product.where(name_url: params[:name_url]).first
       render "show"
     end
   end

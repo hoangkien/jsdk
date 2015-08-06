@@ -1,1 +1,377 @@
-<h1>Prduct</h1>
+<div id="Breadcrumb" class="Breadcrumb">
+    <ul>
+        <li class="first">
+          <a href="/">Trang chủ</a>
+        </li>
+        <li>
+          <a href="#">Sản phẩm</a>
+        </li>
+        <li>
+          <a href="#"><%= @product.category.name%></a>
+        </li>
+        <li>
+          <span><%= @product.name %></span>
+        </li>
+    </ul>
+</div>
+<div class="wrap-content">
+  <div id="cphMain_ctl00_ContentPane" class="center center_right">
+    <div class="ProductDetailContainer DetailItem DefaultModule">
+      <div id="ProductDetails" class="PrimaryProductDetails">
+        <div class="BlockContent">
+          <div class="ProductThumb">
+            <div id="LightBoxImages" style="display: none;">
+            </div>
+            <div class="ProductThumbImage" style="width: 400px; height: 350px; text-align: center; overflow: visible;">
+              <%= image_tag(@product.image.url())%>
+            </div>
+            <div class="ProductTinyImageLine"></div>
+            <div id="slideShow" class="ImageCarouselBox">
+              <a id="ImageScrollPrev" class="prev" href="javscript:;" style="display: none;">
+              <img width="20" height="20" src="http://static.bizwebmedia.net/images/LeftArrow.png" alt="" /></a>
+              <a id="ImageScrollNext" class="next" href="javscript:;" style="display: none;">
+              <img width="20" height="20" src="http://static.bizwebmedia.net/images/RightArrow.png" alt="" /></a>
+            </div>
+          </div>
+          <div class="ProductMain">
+            <div class="product-title">
+              <h1>
+                <%= @product.name %>
+              </h1>
+            </div>
+            <div class="ProductDetailsGrid">
+              <div class="Row Price">
+                <span class="LabelPrice">
+                Giá bán</span>
+                <div class="ProductPrice VariationProductPrice">
+                  <%= number_to_currency(@product.price, format: "%n ₫")%>
+                </div>
+              </div>
+              <ul class="ProductField">
+                <li>
+                  <span class="label">
+                  Số lượng đã bán</span>
+                  <span class="value">
+                  0&nbsp;</span>
+                </li>
+                <li style="display: none;">
+                  <span class="label">
+                  Đánh giá</span>
+                  <span class="value">
+                    <div class='ProductRating Rating-1'>
+                      <div class='RatingImage'></div>
+                    </div>
+                  </span>
+                </li>
+                <li style="display: ;">
+                  <span class="label">
+                  Phí vận chuyển</span>
+                  <span class="value">
+                  Tính phí khi thanh toán
+                  </span>
+                </li>
+              </ul>
+              <div class="Row ShortDescription">
+                <div class="ShortDescriptionTitle">
+                  Mô tả ngắn
+                </div>
+                <p>
+                  Điểm nổi bật: Gồm 607 chi tiết<br />Dành cho bé trên 4 tuổi<br />Kích thích tư duy sáng tạo
+                </p>
+              </div>
+              <div class="OutOfStockMessage" style="margin: 0; display: none;"></div>
+              <div class="DetailRow">
+                <div class="Row AddCartButton ProductAddToCart">
+                  <div class="LabelQuantityInput">
+                    Số lượng:
+                  </div>
+                  <input type="text" id="cphMain_ctl00_ctl03_ctl00_qty_" maxlength="5" value="1" class="Field45 quantityInput NormalTextBox" />
+                  <div class="ProductActionAdd" data-target="#myModal" data-id = "<%= @product.id; %>" onClick="Popupcart(<%= @product.id %>);">
+                    <a href="javascript:;"  ><span >Mua hàng</span></a>
+                  </div>
+                  <div class="Clear"></div>
+                </div>
+              </div>
+            </div>
+            <div id="tgian_lv"></div>
+          </div>
+        </div>
+        <br class="Clear">
+          <div class="ProcductContainer">
+            <div class="ProductTabs">
+              <script type="text/javascript">
+                function ActiveProductTab(TabId) {
+                    var CurTabId = $j('#ProductTabs .Active').attr('id');
+                    var CurTabContentId = CurTabId.replace('_Tab', '');
+                    $j('#ProductTabs .Active').removeClass('Active');
+                    $j('#' + CurTabContentId).hide();
+                    $j('#' + TabId).addClass('Active');
+                    var NewTabContentId = TabId.replace('_Tab', '');
+                    $j('#' + NewTabContentId).show();
+                }
+              </script>
+              <div class="Panel" id="ProductTabs">
+                <ul class="TabNav" id="ProductTabsList">
+                  <li id="ProductDescription_Tab" class="Active">
+                    <a onclick="ActiveProductTab('ProductDescription_Tab'); return false;" href="javscript:;">
+                    Thông tin
+                    </a>
+                  </li>
+                  <li id="ProductReviews_Tab" class="">
+                    <a onclick="ActiveProductTab('ProductReviews_Tab'); return false;" href="javscript:;">
+                    Đánh giá
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div id="ProductDescription" class="Block Panel ProductDescription" style="display: block; overflow: hidden;">
+                <div class="ProductDescriptionContainer">
+                 <%= raw @product.details %>
+                </div>
+                <hr class="ProductSectionSeparator" style="display: none;">
+              </div>
+              <div id="ProductRelatedProducts" style="display: none;" class="Block Panel">
+                <ul class="ProductList">
+                </ul>
+                <div class="Clear">
+                </div>
+              </div>
+              <div id="ProductReviews" class="Block Panel" style="display: none;">
+                <div class="BlockContent Clear">
+                  <div id="writeComment" class="FormContainer VerticalFormContainer Clear">
+                    <dl>
+                      <dt>1.
+                        Đánh giá:
+                      </dt>
+                      <dd>
+                        <select name="ctl00$cphMain$ctl00$ctl03$ctl00$ddlRating_Review" id="cphMain_ctl00_ctl03_ctl00_ddlRating_Review" class="NormalTextBox" onchange="javascript:OnChangeRate();" style="width:256px;">
+                          <option value="5">5 sao (Tốt nhất)</option>
+                          <option value="4">4 sao</option>
+                          <option value="3">3 sao (Trung bình)</option>
+                          <option value="2">2 sao</option>
+                          <option value="1">1 sao (Tồi nhất)</option>
+                        </select>
+                      </dd>
+                      <dt></dt>
+                      <dd>
+                        <div id="star-1" class="rating-on" onmouseover="javascript:OverStarRating(1, 3);"></div>
+                        <div id="star-2" class="rating-on" onmouseover="javascript:OverStarRating(2, 3);"></div>
+                        <div id="star-3" class="rating-on" onmouseover="javascript:OverStarRating(3, 3);"></div>
+                        <div id="star-4" class="rating-off" onmouseover="javascript:OverStarRating(4, 3);"></div>
+                        <div id="star-5" class="rating-off" onmouseover="javascript:OverStarRating(5, 3);"></div>
+                        <div id="star-6" class="rating-zero" onmouseover="javascript:OverStarRating(6, 3);"></div>
+                        <div class="Clear">
+                        </div>
+                      </dd>
+                      <dt>2.
+                        Tiêu đề:
+                      </dt>
+                      <dd>
+                        <input name="ctl00$cphMain$ctl00$ctl03$ctl00$txtTitle_Review" type="text" id="cphMain_ctl00_ctl03_ctl00_txtTitle_Review" class="NormalTextBox" style="width:250px;">
+                      </dd>
+                      <dt>3.
+                        Nội dung:
+                      </dt>
+                      <dd>
+                        <textarea name="ctl00$cphMain$ctl00$ctl03$ctl00$txtContent_Review" rows="6" cols="20" id="cphMain_ctl00_ctl03_ctl00_txtContent_Review" class="NormalTextBox" style="width:250px;"></textarea>
+                      </dd>
+                      <dt>4.
+                        Họ tên:
+                      </dt>
+                      <dd>
+                        <input name="ctl00$cphMain$ctl00$ctl03$ctl00$txtFromName_Review" type="text" id="cphMain_ctl00_ctl03_ctl00_txtFromName_Review" class="NormalTextBox" style="width:250px;">
+                      </dd>
+                      <dt>5.
+                        Xác nhận:
+                      </dt>
+                      <dd>
+                        <div style="float: left; margin-bottom: 0px;">
+                          <input name="ctl00$cphMain$ctl00$ctl03$ctl00$txtMangaunhien" type="text" maxlength="6" id="cphMain_ctl00_ctl03_ctl00_txtMangaunhien" class="NormalTextBox" style="width:70px;">
+                        </div>
+                        <div style="float: left; margin: 0px 0px 0px 10px;">
+
+                        </div>
+                        <div style="float: left; margin: 0px 0px 0px 10px;">
+                          <a id="resetCapcha" href="javascript:void(0);">
+                          <img src="http://static.bizwebmedia.net/images/bw/refesh7.png" style="height: 21px;" alt=""></a>
+                        </div>
+                        <div style="clear: both;"></div>
+                      </dd>
+                      <dt id="gohere">&nbsp;</dt>
+                      <dd>
+                        <input type="submit" name="ctl00$cphMain$ctl00$ctl03$ctl00$btnSubmitReview" value="Gửi bình luận của bạn" onclick="javascript:return InsertProductReview();" id="cphMain_ctl00_ctl03_ctl00_btnSubmitReview">
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+                <div class="Clear"></div>
+              </div>
+              <div id="ProductVideos" class="Block Panel" style="display: none;">
+                <div class="VideoContainer">
+                  <div id="youtubeLeftBox" class="youtubeVideoListBox" style="width: 100%; text-align: center; border: none; height: 435px; overflow: hidden;">
+                  </div>
+                  <div class="Clear">
+                  </div>
+                  <div id="youtubeRightBox" class="youtubeVideoListBox" style="width: 100%;">
+                    <ul id="youTubeCurrentVideos" class="ui-sortable">
+                    </ul>
+                  </div>
+                </div>
+                <div class="Clear">
+                </div>
+              </div>
+              <div id="ProductFeatures" class="Block Panel" style="display: none;">
+                <div class="BlockContent">
+                  <div class="item-container">
+                  </div>
+                </div>
+                <div class="Clear"></div>
+              </div>
+            </div>
+            <div class="ProductByCategory">
+              <div id="ProductByCategory" class="Block Panel" style="padding: 0px;">
+                <h3>
+                  Sản phẩm cùng loại
+                </h3>
+                <div class="FindByCategory">
+                  <ul class="ProductList">
+                    <li class="Odd">
+                      <div id="ProductImage" class="ProductImage">
+                        <a href="/o-to-tha-hinh-go-kitty-6927018.html">
+                        <img alt="Ô tô thả hình gỗ Kitty" title="Ô tô thả hình gỗ Kitty" src="http://media.bizwebmedia.net/Thumbnails//sites/97940/data/images/2015/3/092391954.209.160.jpg" onerror="this.src='http://media.bizwebmedia.net/Thumbnail.ashx?img=/sites/97940/data/images/2015/3/092391954.jpg&amp;width=209&amp;height=160';">
+                        </a>
+                      </div>
+                      <div class="saleFlag iconSprite disable">
+                      </div>
+                      <div class="ProductDetails">
+                        <strong><a href="/o-to-tha-hinh-go-kitty-6927018.html">
+                        Ô tô thả hình gỗ Kitty</a></strong>
+                      </div>
+                      <div class="ProductPrice">
+                        <div class="retail-price ">
+                          <span class="price-label"></span><span class="price"><strike class="RetailPriceValue">
+                          200.000 ₫</strike>
+                          </span>
+                        </div>
+                        <div class="special-price">
+                          <span class="price-label"></span><span class="price"><em>
+                          157.000 ₫</em>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="ProductRating Rating-1" style="display: none;">
+                        <div class="RatingImage">
+                        </div>
+                      </div>
+                      <div class="ProductActionAdd"><a href="javascript:;" onclick="javascript:PopupCart(6927018);"><span>Mua hàng</span></a></div>
+                    </li>
+                    <li class="Even">
+                      <div id="ProductImage" class="ProductImage">
+                        <a href="/do-choi-thu-bong-6927016.html">
+                        <img alt="Đồ chơi thú bông" title="Đồ chơi thú bông" src="http://media.bizwebmedia.net/Thumbnails//sites/97940/data/images/2015/3/075954055.209.160.jpg" onerror="this.src='http://media.bizwebmedia.net/Thumbnail.ashx?img=/sites/97940/data/images/2015/3/075954055.jpg&amp;width=209&amp;height=160';">
+                        </a>
+                      </div>
+                      <div class="saleFlag iconSprite disable">
+                      </div>
+                      <div class="ProductDetails">
+                        <strong><a href="/do-choi-thu-bong-6927016.html">
+                        Đồ chơi thú bông</a></strong>
+                      </div>
+                      <div class="ProductPrice">
+                        <div class="retail-price disable">
+                          <span class="price-label"></span><span class="price"><strike class="RetailPriceValue">
+                          </strike>
+                          </span>
+                        </div>
+                        <div class="special-price">
+                          <span class="price-label"></span><span class="price"><em>
+                          342.000 ₫</em>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="ProductRating Rating-1" style="display: none;">
+                        <div class="RatingImage">
+                        </div>
+                      </div>
+                      <div class="ProductActionAdd"><a href="javascript:;" onclick="javascript:PopupCart(6927016);"><span>Mua hàng</span></a></div>
+                    </li>
+                    <li class="Odd">
+                      <div id="ProductImage" class="ProductImage">
+                        <a href="/vit-cuu-ho-32501-munchkin-6927015.html">
+                        <img alt="Vit cứu hộ 32501 Munchkin" title="Vit cứu hộ 32501 Munchkin" src="http://media.bizwebmedia.net/Thumbnails//sites/97940/data/images/2015/3/071252252.209.160.jpg" onerror="this.src='http://media.bizwebmedia.net/Thumbnail.ashx?img=/sites/97940/data/images/2015/3/071252252.jpg&amp;width=209&amp;height=160';">
+                        </a>
+                      </div>
+                      <div class="saleFlag iconSprite disable">
+                      </div>
+                      <div class="ProductDetails">
+                        <strong><a href="/vit-cuu-ho-32501-munchkin-6927015.html">
+                        Vit cứu hộ 32501 Munchkin</a></strong>
+                      </div>
+                      <div class="ProductPrice">
+                        <div class="retail-price disable">
+                          <span class="price-label"></span><span class="price"><strike class="RetailPriceValue">
+                          </strike>
+                          </span>
+                        </div>
+                        <div class="special-price">
+                          <span class="price-label"></span><span class="price"><em>
+                          298.000 ₫</em>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="ProductRating Rating-1" style="display: none;">
+                        <div class="RatingImage">
+                        </div>
+                      </div>
+                      <div class="ProductActionAdd"><a href="javascript:;" onclick="javascript:PopupCart(6927015);"><span>Mua hàng</span></a></div>
+                    </li>
+                    <li class="Even">
+                      <div id="ProductImage" class="ProductImage">
+                        <a href="/bo-noi-rung-tu-dong-6926990.html">
+                        <img alt="Bộ nôi rung tự động" title="Bộ nôi rung tự động" src="http://media.bizwebmedia.net/Thumbnails//sites/97940/data/images/2014/12/590690334.209.160.jpg" onerror="this.src='http://media.bizwebmedia.net/Thumbnail.ashx?img=/sites/97940/data/images/2014/12/590690334.jpg&amp;width=209&amp;height=160';">
+                        </a>
+                      </div>
+                      <div class="saleFlag iconSprite disable">
+                      </div>
+                      <div class="ProductDetails">
+                        <strong><a href="/bo-noi-rung-tu-dong-6926990.html">
+                        Bộ nôi rung tự động</a></strong>
+                      </div>
+                      <div class="ProductPrice">
+                        <div class="retail-price disable">
+                          <span class="price-label"></span><span class="price"><strike class="RetailPriceValue">
+                          </strike>
+                          </span>
+                        </div>
+                        <div class="special-price">
+                          <span class="price-label"></span><span class="price"><em>
+                          5.905.000 ₫</em>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="ProductRating Rating-1" style="display: none;">
+                        <div class="RatingImage">
+                        </div>
+                      </div>
+                      <div class="ProductActionAdd"><a href="javascript:;" onclick="javascript:PopupCart(6926990);"><span>Mua hàng</span></a></div>
+                    </li>
+                  </ul>
+                  <br class="Clear">
+                </div>
+                <div class="ViewMore">
+                  <a href="/do-so-sinh-b1843698.html">
+                  Xem thêm
+                  </a>
+                </div>
+                <hr class="Clear ProductSectionSeparator" style="display: none;">
+              </div>
+            </div>
+            <br class="Clear">
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="add_cart">
+  <%= render"order"%>
+</div>

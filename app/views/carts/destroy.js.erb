@@ -1,0 +1,10 @@
+<%  if @total.to_i == 0 %>
+  $("#cart_content").html("<h2>Giỏ hàng của bạn</h2>"+
+                          "Chưa có sản phẩm nào trong giỏ hàng của bạn!");
+<% else %>
+  $("table tr[data-id ='"+ '<%= @id %>' +"']").remove();
+  $(".Total").html('<%= "Thành tiền: #{number_to_currency(@total, unit:'$ ')}"%>');
+  $(".SubTotal").html('<%= "Tổng tiền thanh toán: #{number_to_currency(@total, unit:'$ ')}"%>');
+<% end %>
+
+

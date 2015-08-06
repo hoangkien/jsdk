@@ -1,0 +1,23 @@
+<div id="Logo">
+  <div id="LogoContainer"><a href="./assets/template_banhang.html"><img src="./assets/2015415165917353.png"></a></div>
+</div>
+<div id="SearchForm">
+  <script type="text/javascript">
+     function keyDownHandler(key, link, event) {
+         if (event.keyCode == key) {
+             $j("[id$='txtSearch']").click();
+         }
+     }
+     function OnSearchClick() {
+         var content = $j("[id$='txtSearch']").val();
+         if (content == "") return false;
+         if (content.length < 2) return false;
+         return true;
+     }
+  </script>
+  <div id="SearchFormContainer">
+     <input name="ctl00$ctlSearch$ctl00$txtSearch" type="text" id="ctlSearch_ctl00_txtSearch" class="search-input" onkeydown="return keyDownHandler(13, &#39;javascript:__doPostBack(%27ctl00$ctlSearch$ctl00$btnSearch%27,%27%27)&#39;, event);">
+     <input type="submit" name="ctl00$ctlSearch$ctl00$btnSearch" value="" onclick="javascript:return OnSearchClick();" id="ctlSearch_ctl00_btnSearch" class="search-button">
+     <a href="http://ecom186clone.bizwebvietnam.com/search.html?action=advance" class="search-adv" title="Tìm kiếm nâng cao">
+     <span>+</span> </a>
+</div>
